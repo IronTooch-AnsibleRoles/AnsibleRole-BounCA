@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: bounca
   author: IronTooch 
-  description: Installs the BounCA Web Interface tool for self-hosted PKI
+  description: Installs the BounCA Web Interface tool for self-hosted PKI (Developed by Jeroen Arnoldus (jeroen@repleo.nl))
   company: Tooch IO, LLC
 
   license: GPL-3.0-only
