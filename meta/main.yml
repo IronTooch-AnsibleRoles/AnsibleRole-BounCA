@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: bounca
+  namespace: irontooch
   author: IronTooch 
   description: Installs the BounCA Web Interface tool for self-hosted PKI (Developed by Jeroen Arnoldus (jeroen@repleo.nl))
   company: Tooch IO, LLC
