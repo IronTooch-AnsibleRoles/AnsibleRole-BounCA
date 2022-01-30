@@ -30,17 +30,13 @@ jobs:
         # uses: awalsh128/cache-apt-pkgs-action@4d3d45c02fc55c7c51c35dc786bc818431ae27dc
         uses: awalsh128/cache-apt-pkgs-action@v1
         with:
-          packages: ansible-lint yamllint
+          packages: ansible-lint yamllint python3-ruamel.yaml
           version: 1.0
           refresh: false
 
       
       - name: Check working directory
         run: ls
-
-      - uses: actions/setup-python@v2
-        with:
-          cache: 'ruamel.yaml'
 
       - name: Run Ansible-Lint
         run: ansible-lint
