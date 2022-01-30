@@ -25,26 +25,24 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Make function for getting Pip versions of packages
-        run: get_pip_ver() { curl -s https://pypi.org/pypi/$@/json | jq ".info.version" | tr -d '"'; }
-        shell: bash
-
       - name: Set the value of Ansible-Lints Version (to build cache key)
         run: |
-          echo "ANSIBLE_LINT_VERSION=$(get_pip_ver ansible-lint)" >> $GITHUB_ENV
-        shell: bash
+          echo "ANSIBLE_LINT_VERSION=$(curl -s https://pypi.org/pypi/ansible-lint/json | jq ".info.version" | tr -d '"')" >> $GITHUB_ENV
           
       - name: Set the value of YamlLints Version (to build cache key)
         run: |
-          echo "YAMLLINT_VERSION=$(get_pip_ver yamllint)" >> $GITHUB_ENV
-        shell: bash
+          echo "YAMLLINT_VERSION=$(curl -s https://pypi.org/pypi/yamllint/json | jq ".info.version" | tr -d '"')" >> $GITHUB_ENV       
+
+      - name: Set the value of Ansible Version (to build cache key)
+        run: |
+          echo "ANSIBLE_VERSION=$(curl -s https://pypi.org/pypi/ansible/json | jq ".info.version" | tr -d '"')" >> $GITHUB_ENV       
 
       - uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: pip-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
+          key: pip-${{ env.ANSIBLE_VERSION }}-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
           restore-keys: |
-            pip-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
+            pip-${{ env.ANSIBLE_VERSION }}-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
       
       - name: Check working directory
         run: ls
