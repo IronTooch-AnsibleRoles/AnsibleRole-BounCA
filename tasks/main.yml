@@ -37,7 +37,7 @@
     name: "{{ bounca_dbuser }}"
     password: "{{ bounca_dbpassword }}"
     role_attr_flags: CREATEDB
-  
+
 - name: Create Postgres DB and grant to user
   become_user: postgres
   community.postgresql.postgresql_db:
@@ -85,22 +85,25 @@
     src: default.j2
     dest: /etc/nginx/sites-enabled/default
     force: true
+    mode: '0770'
 
 - name: Template out uwsgi apps-available
   ansible.builtin.template:
     src: bounca.ini.j2
     dest: /etc/uwsgi/apps-enabled/bounca.ini
     force: true
+    mode: '0770'
 
 - name: Make random string for Django
   set_fact:
     django_key: "{{ lookup('community.general.random_string', length=24, special=false) }}"
 
-- name: Template out BounCA services file 
+- name: Template out BounCA services file
   ansible.builtin.template:
     src: services.yaml.j2
     dest: /etc/bounca/services.yaml
     force: true
+    mode: '0770'
 
 - name: Install Pip Requirements
   ansible.builtin.pip:
