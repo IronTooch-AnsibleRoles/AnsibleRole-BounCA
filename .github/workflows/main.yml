@@ -47,7 +47,7 @@ jobs:
         run: ls
         
       - name: Install Ansible-Lint and Yamllint
-        run: pip install ansible-lint yamllint
+        run: pip install ansible-lint yamllint ansible
 
       - name: Run Ansible-Lint
         run: ansible-lint --version
