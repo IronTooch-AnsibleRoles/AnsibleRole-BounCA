@@ -25,7 +25,7 @@
       - python3-psycopg2      # Needed for postgres modules
       - acl                   # Needed for become_user: postgres
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Make random database password and MD5 it
   set_fact:
@@ -59,8 +59,6 @@
     path: /etc/bounca
     state: directory
     mode: '0755'
-    # owner: www-data
-    # group: www-data
 
 - name: Get BounCA Release
   ansible.builtin.get_url:
@@ -72,13 +70,13 @@
   ansible.builtin.unarchive:
     src: "/tmp/bounca.tar.gz"
     dest: '/var/www'
-    remote_src: yes
+    remote_src: true
 
 - name: Chown /var/www/bounca directory
   ansible.builtin.file:
     path: /var/www/bounca
     state: directory
-    recurse: yes
+    recurse: true
     owner: 'www-data'
     group: 'www-data'
 
@@ -86,13 +84,13 @@
   ansible.builtin.template:
     src: default.j2
     dest: /etc/nginx/sites-enabled/default
-    force: yes
+    force: true
 
 - name: Template out uwsgi apps-available
   ansible.builtin.template:
     src: bounca.ini.j2
     dest: /etc/uwsgi/apps-enabled/bounca.ini
-    force: yes
+    force: true
 
 - name: Make random string for Django
   set_fact:
@@ -102,7 +100,7 @@
   ansible.builtin.template:
     src: services.yaml.j2
     dest: /etc/bounca/services.yaml
-    force: yes
+    force: true
 
 - name: Install Pip Requirements
   ansible.builtin.pip:
@@ -138,10 +136,10 @@
   ansible.builtin.service:
     name: uwsgi
     state: restarted
-    enabled: yes
+    enabled: true
 
 - name: Ensure nginx is restarted
   ansible.builtin.service:
     name: nginx
     state: restarted
-    enabled: yes
+    enabled: true
