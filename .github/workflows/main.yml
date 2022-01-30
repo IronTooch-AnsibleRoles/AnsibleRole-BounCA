@@ -44,7 +44,7 @@ jobs:
           path: ~/.cache/pip
           key: pip-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            pip-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
       
       - name: Check working directory
         run: ls
