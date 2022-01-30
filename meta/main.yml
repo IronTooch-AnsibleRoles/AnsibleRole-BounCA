@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: bounca
   namespace: irontooch
-  author: IronTooch 
+  author: IronTooch
   description: Installs the BounCA Web Interface tool for self-hosted PKI (Developed by Jeroen Arnoldus (jeroen@repleo.nl))
   company: Tooch IO, LLC
 
@@ -10,13 +10,13 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
-  - name: Ubuntu
-    versions:
-    - focal
+    - name: Ubuntu
+      versions:
+        - focal
 
-  galaxy_tags: 
-  - selfhosted
-  - pki
+  galaxy_tags:
+    - selfhosted
+    - pki
 
-dependencies: 
+dependencies:
   - community.postgresql
