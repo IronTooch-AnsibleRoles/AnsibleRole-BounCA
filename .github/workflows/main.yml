@@ -38,6 +38,10 @@ jobs:
       - name: Check working directory
         run: ls
 
+      - uses: actions/setup-python@v2
+        with:
+          cache: 'ruamel.yaml'
+
       - name: Run Ansible-Lint
         run: ansible-lint
         shell: bash
