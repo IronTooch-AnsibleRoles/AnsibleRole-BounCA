@@ -32,7 +32,7 @@ jobs:
       
       
       - name: ansible-lint including yamllint
-        uses: hfrSchmidt/ansible-lint-github-action@master
+        uses: hfrSchmidt/ansible-lint-github-action@v1.0.1
         with:
           project_dir: './'
           config_file: '.ansible-lint.yml'
