@@ -47,6 +47,11 @@ Including an example of how to use your role (for instance, with variables passe
       vars:
         server_names: ["server1","server.example.com","11.22.33.44"]
 
+To Do
+-----
+
+Create Admin User options.
+
 License
 -------
 
