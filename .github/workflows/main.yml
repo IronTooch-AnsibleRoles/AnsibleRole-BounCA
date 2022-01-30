@@ -24,22 +24,36 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Make function for getting Pip versions of packages
+        run: get_pip_ver() { curl -s https://pypi.org/pypi/$@/json | jq ".info.version" | tr -d '"'; }
 
-      - name: Cache APT Packages
-        # You may pin to the exact commit or the version.
-        # uses: awalsh128/cache-apt-pkgs-action@4d3d45c02fc55c7c51c35dc786bc818431ae27dc
-        uses: awalsh128/cache-apt-pkgs-action@v1
+      - name: Set the value of Ansible-Lints Version (to build cache key)
+        run: |
+          echo "ANSIBLE_LINT_VERSION=$(get_pip_ver ansible-lint)" >> $GITHUB_ENV
+          
+      - name: Set the value of YamlLints Version (to build cache key)
+        run: |
+          echo "YAMLLINT_VERSION=$(get_pip_ver yamllint)" >> $GITHUB_ENV       
+
+      - uses: actions/cache@v2
         with:
-          packages: ansible-lint yamllint python3-ruamel.yaml
-          version: 1.0
-          refresh: false
-
+          path: ~/.cache/pip
+          key: pip-${{ env.ANSIBLE_LINT_VERSION }}-${{ env.YAMLLINT_VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       
       - name: Check working directory
         run: ls
+        
+      - name: Install Ansible-Lint and Yamllint
+        run: pip install ansible-lint yamllint ansible
 
+      - name: Run Ansible-Lint
+        run: ansible-lint --version
+        shell: bash
+    
       - name: Run Ansible-Lint
         run: ansible-lint
         shell: bash
-        
         
