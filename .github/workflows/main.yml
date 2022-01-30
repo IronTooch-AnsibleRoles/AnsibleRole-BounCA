@@ -27,6 +27,13 @@ jobs:
 
       - name: ansible-lint
         uses: ansible/ansible-lint-action@v4.1.0.post0
+        with:
+          targets: "./"
+      
       
       - name: ansible-lint including yamllint
         uses: hfrSchmidt/ansible-lint-github-action@v1.0.1
+        with:
+          project_dir: './'
+          config_file: '.ansible-lint.yml'
+          args: '--parseable-severity --force-color'
