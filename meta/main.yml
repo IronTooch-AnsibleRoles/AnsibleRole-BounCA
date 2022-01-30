@@ -18,5 +18,4 @@ galaxy_info:
     - selfhosted
     - pki
 
-dependencies:
-  - community.postgresql
+dependencies: []
