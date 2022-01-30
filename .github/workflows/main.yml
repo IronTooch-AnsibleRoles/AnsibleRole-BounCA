@@ -39,7 +39,7 @@ jobs:
         run: ls
 
       - name: Run Ansible-Lint
-        run: ansible-lint
+        run: ansible-lint --version
         shell: bash
         
         
