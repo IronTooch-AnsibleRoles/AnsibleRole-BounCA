@@ -27,14 +27,17 @@ jobs:
       
       - name: Make function for getting Pip versions of packages
         run: get_pip_ver() { curl -s https://pypi.org/pypi/$@/json | jq ".info.version" | tr -d '"'; }
+        shell: bash
 
       - name: Set the value of Ansible-Lints Version (to build cache key)
         run: |
           echo "ANSIBLE_LINT_VERSION=$(get_pip_ver ansible-lint)" >> $GITHUB_ENV
+        shell: bash
           
       - name: Set the value of YamlLints Version (to build cache key)
         run: |
-          echo "YAMLLINT_VERSION=$(get_pip_ver yamllint)" >> $GITHUB_ENV       
+          echo "YAMLLINT_VERSION=$(get_pip_ver yamllint)" >> $GITHUB_ENV
+        shell: bash
 
       - uses: actions/cache@v2
         with:
@@ -48,12 +51,13 @@ jobs:
         
       - name: Install Ansible-Lint and Yamllint
         run: pip install ansible-lint yamllint ansible
+        shell: bash
 
       - name: Run Ansible-Lint
         run: ansible-lint --version
         shell: bash
     
-#       - name: Run Ansible-Lint
-#         run: ansible-lint
-#         shell: bash
+      - name: Run Ansible-Lint
+        run: ansible-lint
+        shell: bash
         
