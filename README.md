@@ -6,7 +6,8 @@ Installs the BounCA Web Interface tool for self-hosted PKI. BounCA's main reposi
 This has only been tested on Ubuntu 20 server, but should work fine on other Debian-based systems..
 
 
-![Ansible Role](https://img.shields.io/ansible/role/57702)
+![Ansible Role](https://img.shields.io/ansible/role/57813)
+[![Ansible Lint](https://github.com/IronTooch/AnsibleRole-BounCA/actions/workflows/main.yml/badge.svg)](https://github.com/IronTooch/AnsibleRole-BounCA/actions/workflows/main.yml)
 ![Galaxy Downloads](https://img.shields.io/badge/dynamic/json?color=blueviolet&label=Galaxy%20Downloads&query=%24.download_count&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F57702%2F%3Fformat%3Djson) 
 ![GitHub all releases](https://img.shields.io/github/downloads-pre/irontooch/AnsibleRole-BounCA/total)
 ![GitHub repo size](https://img.shields.io/github/repo-size/IronTooch/AnsibleRole-BounCA)
